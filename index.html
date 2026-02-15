@@ -25,31 +25,39 @@
 
     <main class="main">
       <section class="panel active" id="panel-email" role="tabpanel" aria-labelledby="tab-email">
-        <label class="label" for="input-email">Paste or type the email content</label>
-        <textarea id="input-email" class="input" rows="8" placeholder="Dear Customer, Your account has been suspended. Click here to verify: https://paypal-secure.com/..."></textarea>
-        <button type="button" class="btn primary" data-detect="email">Analyze email</button>
+        <div class="input-card">
+          <label class="label" for="input-email">Paste or type the email content</label>
+          <textarea id="input-email" class="input" rows="8" placeholder="Dear Customer, Your account has been suspended. Click here to verify: https://paypal-secure.com/..."></textarea>
+          <button type="button" class="btn primary" data-detect="email">Analyze email</button>
+        </div>
       </section>
 
       <section class="panel" id="panel-sms" role="tabpanel" aria-labelledby="tab-sms" hidden>
-        <label class="label" for="input-sms">Paste or type the SMS / text message</label>
-        <textarea id="input-sms" class="input" rows="6" placeholder="URGENT: Your bank account has unusual activity. Verify now: https://bit.ly/xxxx"></textarea>
-        <button type="button" class="btn primary" data-detect="sms">Analyze SMS</button>
+        <div class="input-card">
+          <label class="label" for="input-sms">Paste or type the SMS / text message</label>
+          <textarea id="input-sms" class="input" rows="6" placeholder="URGENT: Your bank account has unusual activity. Verify now: https://bit.ly/xxxx"></textarea>
+          <button type="button" class="btn primary" data-detect="sms">Analyze SMS</button>
+        </div>
       </section>
 
       <section class="panel" id="panel-listing" role="tabpanel" aria-labelledby="tab-listing" hidden>
-        <label class="label" for="input-listing">Paste or type the listing description</label>
-        <textarea id="input-listing" class="input" rows="8" placeholder="Selling iPhone, brand new. Must sell today - contact me on WhatsApp. Wire transfer only."></textarea>
-        <button type="button" class="btn primary" data-detect="listing">Analyze listing</button>
+        <div class="input-card">
+          <label class="label" for="input-listing">Paste or type the listing description</label>
+          <textarea id="input-listing" class="input" rows="8" placeholder="Selling iPhone, brand new. Must sell today - contact me on WhatsApp. Wire transfer only."></textarea>
+          <button type="button" class="btn primary" data-detect="listing">Analyze listing</button>
+        </div>
       </section>
 
       <section class="panel" id="panel-link" role="tabpanel" aria-labelledby="tab-link" hidden>
-        <label class="label" for="input-link">Paste a product or store link (e.g. Amazon, eBay)</label>
+        <div class="input-card">
+          <label class="label" for="input-link">Paste a product or store link (e.g. Amazon, eBay)</label>
         <input type="url" id="input-link" class="input input-url" placeholder="https://www.amazon.com/dp/... or https://www.ebay.com/itm/..." autocomplete="url">
         <div class="link-actions">
           <button type="button" class="btn primary" data-detect="link">Check URL only</button>
           <button type="button" class="btn secondary" id="btn-fetch-listing" data-fetch-listing>Fetch &amp; analyze listing</button>
         </div>
         <p class="link-hint">“Fetch & analyze listing” loads the page and checks the listing text for scam patterns. Requires the app to be run with <code>npm start</code>.</p>
+        </div>
       </section>
 
       <aside class="results" id="results" aria-live="polite">
