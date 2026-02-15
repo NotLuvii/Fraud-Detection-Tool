@@ -30,7 +30,7 @@ All checks are **rule-based** and run in the browser (or via a small Node server
    npm install
    npm start
    ```
-2. Open **http://localhost:3000** in your browser.
+2. Open **http://localhost:3035** in your browser.
 3. Go to the **Link / URL** tab, paste a product or store link (e.g. Amazon, eBay).
 4. Click **Fetch & analyze listing** to have the server load the page, extract the listing text, and run both the URL checker and the fake-listing checker.
 5. Review the combined risk score and issues (labeled as URL vs Listing).
