@@ -3,85 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scam &amp; Fraud Detection Tool</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <meta name="color-scheme" content="light dark">
+  <title>Scam detection: is this message a scam?</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div class="wrap">
-    <header class="header">
-      <h1 class="title">Scam &amp; Fraud Detection</h1>
-      <p class="tagline">Check emails, SMS, and listings for common scam patterns</p>
-    </header>
+  <a class="skip" href="#check">Skip to the check</a>
+  <header class="bar">
+    <div class="bar-inner">
+      <span class="wordmark">Scam detection</span>
+      <span class="bar-note">Rule-based · runs in your browser</span>
+    </div>
+  </header>
 
-    <nav class="tabs" role="tablist" aria-label="Detection type">
-      <button type="button" id="tab-email" class="tab active" role="tab" aria-selected="true" data-tab="email">Phishing email</button>
-      <button type="button" id="tab-sms" class="tab" role="tab" aria-selected="false" data-tab="sms">SMS / Text</button>
-      <button type="button" id="tab-listing" class="tab" role="tab" aria-selected="false" data-tab="listing">Fake listing</button>
-      <button type="button" id="tab-link" class="tab" role="tab" aria-selected="false" data-tab="link">Link / URL</button>
-    </nav>
+  <main id="check" class="page">
+    <section class="intro" aria-labelledby="title">
+      <h1 id="title">Is this a scam?</h1>
+      <p class="lede">Paste an email, a text message, a listing or a link. Rule-based checks score it from 0 to 100 and show every warning sign behind the score.</p>
+    </section>
 
-    <main class="main">
-      <section class="panel active" id="panel-email" role="tabpanel" aria-labelledby="tab-email">
-        <div class="input-card">
-          <label class="label" for="input-email">Paste or type the email content</label>
-          <textarea id="input-email" class="input" rows="8" placeholder="Dear Customer, Your account has been suspended. Click here to verify: https://paypal-secure.com/..."></textarea>
-          <button type="button" class="btn primary" data-detect="email">Analyze email</button>
+    <div class="workspace">
+      <section class="compose" aria-label="What to check">
+        <div class="segmented" role="tablist" aria-label="What are you checking?">
+          <button type="button" id="tab-email" class="segment" role="tab" aria-selected="true" aria-controls="panel-email" data-tab="email">Email</button>
+          <button type="button" id="tab-sms" class="segment" role="tab" aria-selected="false" aria-controls="panel-sms" data-tab="sms" tabindex="-1">Text</button>
+          <button type="button" id="tab-listing" class="segment" role="tab" aria-selected="false" aria-controls="panel-listing" data-tab="listing" tabindex="-1">Listing</button>
+          <button type="button" id="tab-link" class="segment" role="tab" aria-selected="false" aria-controls="panel-link" data-tab="link" tabindex="-1">Link</button>
         </div>
-      </section>
 
-      <section class="panel" id="panel-sms" role="tabpanel" aria-labelledby="tab-sms" hidden>
-        <div class="input-card">
-          <label class="label" for="input-sms">Paste or type the SMS / text message</label>
-          <textarea id="input-sms" class="input" rows="6" placeholder="URGENT: Your bank account has unusual activity. Verify now: https://bit.ly/xxxx"></textarea>
-          <button type="button" class="btn primary" data-detect="sms">Analyze SMS</button>
-        </div>
-      </section>
-
-      <section class="panel" id="panel-listing" role="tabpanel" aria-labelledby="tab-listing" hidden>
-        <div class="input-card">
-          <label class="label" for="input-listing">Paste or type the listing description</label>
-          <textarea id="input-listing" class="input" rows="8" placeholder="Selling iPhone, brand new. Must sell today - contact me on WhatsApp. Wire transfer only."></textarea>
-          <button type="button" class="btn primary" data-detect="listing">Analyze listing</button>
-        </div>
-      </section>
-
-      <section class="panel" id="panel-link" role="tabpanel" aria-labelledby="tab-link" hidden>
-        <div class="input-card">
-          <label class="label" for="input-link">Paste a product or store link (e.g. Amazon, eBay)</label>
-        <input type="url" id="input-link" class="input input-url" placeholder="https://www.amazon.com/dp/... or https://www.ebay.com/itm/..." autocomplete="url">
-        <div class="link-actions">
-          <button type="button" class="btn primary" data-detect="link">Check URL only</button>
-          <button type="button" class="btn secondary" id="btn-fetch-listing" data-fetch-listing>Fetch &amp; analyze listing</button>
-        </div>
-        <p class="link-hint">“Fetch & analyze listing” loads the page and checks the listing text for scam patterns. Requires the app to be run with <code>npm start</code>.</p>
-        </div>
-      </section>
-
-      <aside class="results" id="results" aria-live="polite">
-        <div class="results-inner" id="results-inner">
-          <p class="results-placeholder" id="results-placeholder">Enter content above and click Analyze to see risk assessment.</p>
-          <div class="results-content" id="results-content" hidden>
-            <div class="risk-bar-wrap">
-              <span class="risk-label">Risk score</span>
-              <div class="risk-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                <span class="risk-fill" id="risk-fill"></span>
-              </div>
-              <span class="risk-value" id="risk-value">0%</span>
-            </div>
-            <p class="risk-level" id="risk-level"></p>
-            <ul class="issues-list" id="issues-list"></ul>
+        <section class="panel" id="panel-email" role="tabpanel" aria-labelledby="tab-email">
+          <label class="label" for="input-email">Paste the email</label>
+          <div class="field" data-field>
+            <div class="mirror" aria-hidden="true"></div>
+            <textarea id="input-email" class="input" rows="9" spellcheck="false" placeholder="Dear Customer, your account has been suspended…"></textarea>
           </div>
-        </div>
-      </aside>
-    </main>
+          <div class="actions">
+            <button type="button" class="btn primary" data-detect="email">Check email</button>
+            <p class="status" role="status" data-status></p>
+          </div>
+        </section>
 
-    <footer class="footer">
-      <p>This tool uses pattern-based checks only. It is not a guarantee—always use caution and official channels when in doubt.</p>
-    </footer>
-  </div>
+        <section class="panel" id="panel-sms" role="tabpanel" aria-labelledby="tab-sms" hidden>
+          <label class="label" for="input-sms">Paste the text message</label>
+          <div class="field" data-field>
+            <div class="mirror" aria-hidden="true"></div>
+            <textarea id="input-sms" class="input" rows="6" spellcheck="false" placeholder="URGENT: your bank detected unusual activity…"></textarea>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn primary" data-detect="sms">Check text</button>
+            <p class="status" role="status" data-status></p>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-listing" role="tabpanel" aria-labelledby="tab-listing" hidden>
+          <label class="label" for="input-listing">Paste the listing</label>
+          <div class="field" data-field>
+            <div class="mirror" aria-hidden="true"></div>
+            <textarea id="input-listing" class="input" rows="9" spellcheck="false" placeholder="iPhone 15 Pro, brand new, must sell today…"></textarea>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn primary" data-detect="listing">Check listing</button>
+            <p class="status" role="status" data-status></p>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-link" role="tabpanel" aria-labelledby="tab-link" hidden>
+          <label class="label" for="input-link">Paste the link</label>
+          <input type="url" id="input-link" class="input input-url" spellcheck="false" autocomplete="url" placeholder="https://www.amazon.com/dp/…">
+          <div class="actions">
+            <button type="button" class="btn primary" data-detect="link">Check link</button>
+            <button type="button" class="btn secondary" id="btn-fetch-listing">Fetch and check the listing</button>
+            <p class="status" role="status" data-status></p>
+          </div>
+          <p class="hint">“Fetch and check the listing” loads the page and checks its text too. It needs the app running with <code>npm start</code>.</p>
+        </section>
+      </section>
+
+      <section class="result" id="results" aria-labelledby="result-title" tabindex="-1">
+        <h2 id="result-title" class="visually-hidden">Result</h2>
+        <div class="empty" id="results-placeholder">
+          <p class="empty-title">Your result appears here.</p>
+          <p class="empty-text">You’ll get a score from 0 to 100, a risk level, and each rule that matched, in its own words.</p>
+        </div>
+        <div class="verdict" id="results-content" hidden aria-live="polite">
+          <p class="score"><span class="score-num" id="risk-value">0</span><span class="score-max">/100</span></p>
+          <p class="level" id="risk-level"></p>
+          <p class="guidance" id="risk-guidance"></p>
+          <div class="meter" role="progressbar" aria-label="Risk score" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <span class="meter-fill" id="risk-fill"></span>
+          </div>
+          <h3 class="issues-title" id="issues-title"></h3>
+          <ul class="issues" id="issues-list"></ul>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <p>Pattern-based checks only. It is not a guarantee: always use caution and official channels when in doubt.</p>
+  </footer>
+
   <script src="js/detectors.js"></script>
   <script src="js/app.js"></script>
 </body>

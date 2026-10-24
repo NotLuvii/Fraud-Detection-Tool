@@ -1,5 +1,12 @@
 # Scam & Fraud Detection Tool
 
+> **Redesign, October 2026** (branch `redesign-2026`): a new front end — a segmented control for the
+> four checks, the result beside the message on wide screens and scrolled into view on phones, the
+> phrases the rules quoted highlighted inside the message, the score as a large number with its level,
+> light and dark modes, and keyboard and screen-reader fixes. The rules in `js/detectors.js` are
+> unchanged, so every input scores exactly as before.
+
+
 A browser-based tool that helps you spot **phishing emails**, **suspicious SMS**, **fake listings**, and **sketchy product links**. Paste content or a URL and get a risk score plus specific red flags. For product links (e.g. Amazon, eBay), you can optionally **fetch the page** and analyze the listing text as well.
 
 ---
